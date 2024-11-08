@@ -1,0 +1,1 @@
+export const RESTCOUNTRY_API = process.env.COUNTRY_PUBLIC_URL!;
