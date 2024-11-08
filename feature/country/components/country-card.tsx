@@ -8,17 +8,17 @@ interface CountryCardProps {
   name: string;
   population: number;
   region: string;
-  capital: string;
-  flag: string;
+  capital?: Array<string>;
+  image: string;
 };
 
-export default function CountryCard({ name, population, region, capital, flag }: CountryCardProps) {
+export default function CountryCard({ name, population, region, capital, image }: CountryCardProps) {
   return (
     <Card className="rounded-lg">
       <div className="relative w-full h-[220px] rounded-lg">
         <Image
-          src={flag}
-          alt={`${name} flag`}
+          src={image}
+          alt={`${name} image`}
           fill
           className="object-cover rounded-t-lg"
         />
@@ -29,9 +29,11 @@ export default function CountryCard({ name, population, region, capital, flag }:
         </CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col text-darkText font-semibold">
-        <p>Population: <span className='text-neutral-600'>{population}</span> </p>
-        <p>Region: <span className='text-neutral-600'>{region}</span> </p>
-        <p>Capital: <span className='text-neutral-600'>{capital}</span> </p>
+        <p>Population: <span className='text-neutral-700'>{population}</span> </p>
+        <p>Region: <span className='text-neutral-700'>{region}</span> </p>
+        <p>Capital:{" "}
+          <span className='text-neutral-700'>{capital?.map(c => { return c + " " })}</span>
+        </p>
       </CardContent>
     </Card>
   )

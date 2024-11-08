@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Nunito_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
+import { QueryProviders } from "@/components/query-provider";
 
 const nunitoSans = Nunito_Sans({
   subsets: ["latin"],
@@ -23,12 +24,14 @@ export default function RootLayout({
       <body
         className={`${nunitoSans.className} antialiased`}
       >
-        <div className="min-h-screen">
-          <div className="size-full flex flex-col">
-            <Header />
-            {children}
+        <QueryProviders>
+          <div className="min-h-screen">
+            <div className="size-full flex flex-col">
+              <Header />
+              {children}
+            </div>
           </div>
-        </div>
+        </QueryProviders>
       </body>
     </html>
   );

@@ -1,18 +1,37 @@
 import { RESTCOUNTRY_API } from "@/config";
 import { Hono } from "hono";
+import { zValidator } from '@hono/zod-validator';
+import { getAllCountrySchema, getCountrySchema } from "../schema";
 
 const app = new Hono()
   .get(
     "/main",
+    zValidator("query", getCountrySchema),
     async (c) => {
-      const { name } = c.req.queries();
-
-      const url = `${RESTCOUNTRY_API}/all?field=${name}`
-
-      console.log(url);
-
-      return c.json({ deta: name });
-      // const response = await fetch (RESTCOUNTRY_API, )
+      try {
+        const { name, fields } = c.req.valid("query");
+        const url = `${RESTCOUNTRY_API}/name/${name}?fields=${fields}`
+        const response = await fetch (url);
+        const data = await response.json();
+      return c.json({ data });  
+      } catch (error) {
+         return c.json({ error: error }, 500);
+      }
+    }
+  )
+  .get(
+    "/all",
+    zValidator("query", getAllCountrySchema),
+    async (c) => {
+      try {
+        const { fields } = c.req.valid("query");
+        const url = `${RESTCOUNTRY_API}/all?fields=${fields}`
+        const response = await fetch (url);
+        const data = await response.json();
+        return c.json({ data });
+      } catch (error) {
+         return c.json({ error: error }, 500);
+      }
     }
   )
 
