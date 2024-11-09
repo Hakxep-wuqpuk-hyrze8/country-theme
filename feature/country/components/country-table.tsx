@@ -9,18 +9,26 @@ import useDebounce from '@/hooks/use-debounce';
 export default function CountryTable() {
   const searchParams = useSearchParams()
   const name = searchParams.get('name')
-  const fieldsQuery = "name,capital,population,region,flags";
+  const region = searchParams.get('region')
+  const FIELDSQUERY = "name,capital,population,region,flags";
   const isSearched = !!name;
 
   const debouncedName = useDebounce(name, 1000);
 
-  const { data: allCountryQuery } = useGetAllCountry(fieldsQuery, !isSearched);
-  const { data: countryQuery } = useGetCountry(debouncedName || "", fieldsQuery, isSearched);
+  const { data: allCountryQuery } = useGetAllCountry(FIELDSQUERY, !isSearched);
+  const { data: countryQuery } = useGetCountry(debouncedName || "", FIELDSQUERY, isSearched);
+
+  let filteredCountry;
 
   if (!debouncedName) {
+    filteredCountry = allCountryQuery?.data;
+    if (region && filteredCountry) {
+      filteredCountry = filteredCountry.filter((country) => country.region === region);
+    }
+
     return (
       <div className="grid grid-cols-4 gap-8">
-        {allCountryQuery?.data.map((data, index) => {
+        {filteredCountry?.map((data, index) => {
           return (
             <CountryCard key={index} name={data.name.official} image={data.flags.svg} region={data.region} capital={data.capital} population={data.population} />
           )
@@ -29,9 +37,14 @@ export default function CountryTable() {
     )
   }
 
+  filteredCountry = countryQuery?.data;
+  if (region && filteredCountry) {
+    filteredCountry = filteredCountry.filter((country) => country.region === region);
+  }
+
   return (
     <div className="grid grid-cols-4 gap-8">
-      {countryQuery?.data.map((data, index) => {
+      {filteredCountry?.map((data, index) => {
         return (
           <CountryCard key={index} name={data.name.official} image={data.flags.svg} region={data.region} capital={data.capital} population={data.population} />
         )

@@ -8,3 +8,8 @@ export const getCountrySchema = z.object({
 export const getAllCountrySchema = z.object({
   fields: z.string(),
 })
+
+export const getCountryByRegionSchema = z.object({
+  region: z.string(),
+  fields: z.string(),
+});

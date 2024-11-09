@@ -10,3 +10,7 @@ declare type CountryType = {
     alt: string;
   };
 };
+
+declare type RegionType = {
+  region: string;
+};

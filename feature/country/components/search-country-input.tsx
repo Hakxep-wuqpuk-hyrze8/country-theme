@@ -10,7 +10,6 @@ declare type SearchCountryInputProps = {
 };
 
 export default function SearchCountryInput({ onClickHandler }: SearchCountryInputProps) {
-
   const [name, setName] = useQueryState(
     "name",
     parseAsString.withDefault("").withOptions({ clearOnDefault: true })

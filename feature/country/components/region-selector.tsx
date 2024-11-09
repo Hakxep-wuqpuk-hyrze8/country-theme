@@ -1,24 +1,77 @@
 "use client"
 
-import React from 'react'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue, SelectGroup, SelectLabel } from "@/components/ui/select"
+import { Button } from '@/components/ui/button';
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
+import { Check, ChevronDown } from 'lucide-react';
+import React from 'react';
+import useGetCountryByRegion from '../api/use-get-country-by-region';
+import { parseAsString, useQueryState } from 'nuqs';
 
 export default function RegionSelector() {
+  const FIELDSQUERY = "region";
+  const PLACEHOLDER = "Filter by Region";
+  const { data: allCountryQuery, isError } = useGetCountryByRegion(FIELDSQUERY);
+
+  const [open, setOpen] = React.useState<boolean>(false)
+
+  const [region, setRegion] = useQueryState<string>(
+    "region",
+    parseAsString.withDefault("").withOptions({ clearOnDefault: true })
+  )
+
+  if (isError) {
+    throw new Error("Error happened while fetching country")
+  }
+
+  const regionsSet = new Set(allCountryQuery?.data.map((country: { region: string }) => country.region))
+  const uniqueRegions = Array.from(regionsSet).filter(region => region).sort();
+
   return (
-    <div className="bg-white p-2 drop-shadow">
-      <Select>
-        <SelectTrigger className="text-darkBlue font-semibold w-[180px]">
-          <SelectValue placeholder="filter by Region" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel> Regions </SelectLabel>
-            <SelectItem value="test1"> test 1 </SelectItem>
-            <SelectItem value="test2"> test 2 </SelectItem>
-            <SelectItem value="test3"> test 3 </SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-    </div>
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          role="combobox"
+          aria-expanded={open}
+          className={cn(
+            "w-[240px] p-6 justify-between text-darkText select-none shadow-md rounded-none",
+            region === "" ? "font-medium" : "font-semibold"
+          )}
+        >
+          {region !== "" ? region : PLACEHOLDER}
+          <ChevronDown className="opacity-50" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-[240px] p-0">
+        <Command>
+          <CommandInput placeholder="Search Region..." />
+          <CommandList>
+            <CommandEmpty>No Region found.</CommandEmpty>
+            <CommandGroup>
+              {uniqueRegions.map((uniRegion, index) => (
+                <CommandItem
+                  key={uniRegion + index}
+                  value={uniRegion}
+                  onSelect={(currentValue) => {
+                    setRegion(currentValue === region ? "" : currentValue)
+                    setOpen(false)
+                  }}
+                >
+                  {uniRegion}
+                  <Check
+                    className={cn(
+                      "ml-auto",
+                      region === uniRegion ? "opacity-100" : "opacity-0"
+                    )}
+                  />
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      </PopoverContent>
+    </Popover>
   )
 }

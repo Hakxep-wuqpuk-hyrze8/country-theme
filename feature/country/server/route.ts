@@ -1,7 +1,7 @@
 import { RESTCOUNTRY_API } from "@/config";
 import { Hono } from "hono";
 import { zValidator } from '@hono/zod-validator';
-import { getAllCountrySchema, getCountrySchema } from "../schema";
+import { getAllCountrySchema, getCountryByRegionSchema, getCountrySchema } from "../schema";
 
 const app = new Hono()
   .get(
@@ -26,6 +26,21 @@ const app = new Hono()
       try {
         const { fields } = c.req.valid("query");
         const url = `${RESTCOUNTRY_API}/all?fields=${fields}`
+        const response = await fetch (url);
+        const data = await response.json();
+        return c.json({ data });
+      } catch (error) {
+         return c.json({ error: error }, 500);
+      }
+    }
+  )
+  .get(
+    "/region",
+    zValidator("query", getCountryByRegionSchema),
+    async (c) => {
+      try {
+        const { region, fields } = c.req.valid("query");
+        const url = `${RESTCOUNTRY_API}/region/${region}?fields=${fields}`
         const response = await fetch (url);
         const data = await response.json();
         return c.json({ data });

@@ -7,7 +7,7 @@ interface getCountryResponse {
 
 export const useGetCountry = (name: string, fields: string, enabled?: boolean) => {
   return useQuery<getCountryResponse, Error>({  
-    queryKey: ["country", name],
+    queryKey: [name],
     queryFn: async () => {
       const response = await client.api.country.main["$get"]({
         query: { name, fields },
