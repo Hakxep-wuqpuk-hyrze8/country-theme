@@ -43,7 +43,7 @@ export default function PaginationBar({ currentPage, totalPages, queryParams }: 
       <Pagination className="text-darkText font-semibold p-7">
         <PaginationContent>
           <PaginationItem>
-            <PaginationPrevious size="default" href={toPrevPage(currentPage)} />
+            <PaginationPrevious size="lg" href={toPrevPage(currentPage)} />
           </PaginationItem>
 
           {Array.from({ length: totalPages }).map((_, i) => (
@@ -53,7 +53,7 @@ export default function PaginationBar({ currentPage, totalPages, queryParams }: 
           ))}
 
           <PaginationItem>
-            <PaginationNext size="default" href={toNextPage(currentPage)} />
+            <PaginationNext size="lg" href={toNextPage(currentPage)} />
           </PaginationItem>
         </PaginationContent>
       </Pagination>
@@ -64,7 +64,7 @@ export default function PaginationBar({ currentPage, totalPages, queryParams }: 
     <Pagination className="text-darkText font-semibold p-7">
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious size="default" href={toPrevPage(currentPage)} />
+          <PaginationPrevious size="lg" href={toPrevPage(currentPage)} />
         </PaginationItem>
 
         <PaginationItem>
@@ -112,7 +112,7 @@ export default function PaginationBar({ currentPage, totalPages, queryParams }: 
 
 
         <PaginationItem>
-          <PaginationNext size="default" href={toNextPage(currentPage)} />
+          <PaginationNext size="lg" href={toNextPage(currentPage)} />
         </PaginationItem>
       </PaginationContent>
     </Pagination>

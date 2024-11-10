@@ -25,7 +25,7 @@ export default function RootLayout({
         className={`${nunitoSans.className} antialiased`}
       >
         <QueryProviders>
-          <div className="min-h-screen">
+          <div className="min-h-screen h-screen">
             <div className="size-full flex flex-col">
               <Header />
               {children}
