@@ -7,7 +7,7 @@ interface getAllCountryByRegionResponse {
 
 export default function useGetCountryByRegion(fields: string){
   return useQuery<getAllCountryByRegionResponse, Error>({
-    queryKey: ['country'],
+    queryKey: ['country-by-region'],
     queryFn: async () => {
       const response = await client.api.country.all["$get"]({
         query: { fields },

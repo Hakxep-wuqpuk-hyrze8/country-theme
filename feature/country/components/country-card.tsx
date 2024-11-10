@@ -3,22 +3,31 @@
 import React from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 interface CountryCardProps {
+  code: string;
   name: string;
   population: number;
   region: string;
   capital?: Array<string>;
   image: string;
+  imageAlt: string;
 };
 
-export default function CountryCard({ name, population, region, capital, image }: CountryCardProps) {
+export default function CountryCard({ code, name, population, region, capital, image, imageAlt }: CountryCardProps) {
+  const router = useRouter();
+
+  const handleNavigation = (code: string) => {
+    router.push(`/country/${code}`)
+  };
+
   return (
-    <Card className="rounded-lg">
+    <Card onClick={() => handleNavigation(code)} className="rounded-lg shadow-md cursor-pointer">
       <div className="relative w-full h-[220px] rounded-lg">
         <Image
           src={image}
-          alt={`${name} image`}
+          alt={imageAlt}
           fill
           className="object-cover rounded-t-lg"
         />

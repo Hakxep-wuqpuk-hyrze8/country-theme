@@ -1,6 +1,40 @@
+declare type CountryDetailType = {
+  flags: {
+    svg: string;
+    alt: string;
+  };
+  name: {
+    official: string;
+    common: string;
+    nativeName: {
+      [key: string]: {
+        official: string;
+        common: string;
+      };
+    };
+  };
+  tld: string[];
+  cca3: string;
+  currencies: {
+    [key: string]: {
+      name: string;
+      symbol: string;
+    };
+  };
+  capital: string[];
+  region: string;
+  subregion: string;
+  languages: {
+    [key: string]: string;
+  };
+  borders: string[];
+  population: number;
+};
+
 declare type CountryType = {
   name: {
     official: string;
+    common: string;
   };
   population: number;
   region: string;
@@ -9,6 +43,7 @@ declare type CountryType = {
     svg: string;
     alt: string;
   };
+  cca3: string;
 };
 
 declare type RegionType = {

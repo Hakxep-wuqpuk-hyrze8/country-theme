@@ -40,20 +40,20 @@ export default function PaginationBar({ currentPage, totalPages, queryParams }: 
 
   if (totalPages <= 6) {
     return (
-      <Pagination className="text-darkText font-semibold p-6">
+      <Pagination className="text-darkText font-semibold p-7">
         <PaginationContent>
           <PaginationItem>
-            <PaginationPrevious size="lg" href={toPrevPage(currentPage)} />
+            <PaginationPrevious size="default" href={toPrevPage(currentPage)} />
           </PaginationItem>
 
           {Array.from({ length: totalPages }).map((_, i) => (
             <PaginationItem key={i + 1}>
-              <PaginationLink className="text-lg" href={handleNavigation(i + 1)}> {i + 1} </PaginationLink>
+              <PaginationLink className="text-medium" href={handleNavigation(i + 1)}> {i + 1} </PaginationLink>
             </PaginationItem>
           ))}
 
           <PaginationItem>
-            <PaginationNext size="lg" href={toNextPage(currentPage)} />
+            <PaginationNext size="default" href={toNextPage(currentPage)} />
           </PaginationItem>
         </PaginationContent>
       </Pagination>
@@ -61,14 +61,14 @@ export default function PaginationBar({ currentPage, totalPages, queryParams }: 
   }
 
   return (
-    <Pagination className="text-darkText font-semibold p-6">
+    <Pagination className="text-darkText font-semibold p-7">
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious size="lg" href={toPrevPage(currentPage)} />
+          <PaginationPrevious size="default" href={toPrevPage(currentPage)} />
         </PaginationItem>
 
         <PaginationItem>
-          <PaginationLink className="text-lg" href={handleNavigation(1)}> 1 </PaginationLink>
+          <PaginationLink className="text-medium" href={handleNavigation(1)}> 1 </PaginationLink>
         </PaginationItem>
 
         {
@@ -81,21 +81,21 @@ export default function PaginationBar({ currentPage, totalPages, queryParams }: 
         {
           currentPage > 2 &&
           <PaginationItem>
-            <PaginationLink className="text-lg" href={handleNavigation(currentPage - 1)}> {currentPage - 1} </PaginationLink>
+            <PaginationLink className="text-medium" href={handleNavigation(currentPage - 1)}> {currentPage - 1} </PaginationLink>
           </PaginationItem>
         }
 
         {
           currentPage > 1 && currentPage < totalPages &&
           <PaginationItem>
-            <PaginationLink className="text-lg" href={handleNavigation(currentPage)}> {currentPage} </PaginationLink>
+            <PaginationLink className="text-medium" href={handleNavigation(currentPage)}> {currentPage} </PaginationLink>
           </PaginationItem>
         }
 
         {
           currentPage < totalPages - 1 &&
           <PaginationItem>
-            <PaginationLink className="text-lg" href={handleNavigation(currentPage + 1)}> {currentPage + 1} </PaginationLink>
+            <PaginationLink className="text-medium" href={handleNavigation(currentPage + 1)}> {currentPage + 1} </PaginationLink>
           </PaginationItem>
         }
 
@@ -107,12 +107,12 @@ export default function PaginationBar({ currentPage, totalPages, queryParams }: 
         }
 
         <PaginationItem>
-          <PaginationLink className="text-lg" href={handleNavigation(totalPages)}> {totalPages} </PaginationLink>
+          <PaginationLink className="text-medium" href={handleNavigation(totalPages)}> {totalPages} </PaginationLink>
         </PaginationItem>
 
 
         <PaginationItem>
-          <PaginationNext size="lg" href={toNextPage(currentPage)} />
+          <PaginationNext size="default" href={toNextPage(currentPage)} />
         </PaginationItem>
       </PaginationContent>
     </Pagination>

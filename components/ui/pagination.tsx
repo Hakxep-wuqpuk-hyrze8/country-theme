@@ -1,9 +1,9 @@
-import * as React from "react"
-import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
-
-import { cn } from "@/lib/utils"
-import { ButtonProps, buttonVariants } from "@/components/ui/button"
-import Link from "next/link"
+import { ButtonProps, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { MoreHorizontal } from "lucide-react";
+import Link from "next/link";
+import * as React from "react";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
   <nav
@@ -67,11 +67,10 @@ const PaginationPrevious = ({
   <PaginationLink
     aria-label="Go to previous page"
     size="default"
-    className={className}
+    className={cn("text-darkText", className)}
     {...props}
   >
-    <ChevronLeft className="h-8 w-8" />
-    {/* <span>Previous</span> */}
+    <FaAngleLeft className="h-8 w-8" />
   </PaginationLink>
 )
 PaginationPrevious.displayName = "PaginationPrevious"
@@ -83,11 +82,10 @@ const PaginationNext = ({
   <PaginationLink
     aria-label="Go to next page"
     size="default"
-    className={className}
+    className={cn("text-darkText", className)}
     {...props}
   >
-    {/* <span>Next</span> */}
-    <ChevronRight className="h-8 w-8" />
+    <FaAngleRight className="h-8 w-8" />
   </PaginationLink>
 )
 PaginationNext.displayName = "PaginationNext"
@@ -114,5 +112,6 @@ export {
   PaginationItem,
   PaginationLink,
   PaginationNext,
-  PaginationPrevious,
-}
+  PaginationPrevious
+};
+

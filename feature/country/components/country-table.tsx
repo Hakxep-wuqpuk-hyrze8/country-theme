@@ -6,12 +6,12 @@ import Link from 'next/link';
 import { useParams, usePathname, useSearchParams } from 'next/navigation';
 import { parseAsInteger, useQueryState } from 'nuqs';
 import { useGetAllCountry } from '../api/use-get-all-country';
-import { useGetCountry } from '../api/use-get-country';
+import { useGetCountryByName } from '../api/use-get-country-by-name';
 import CountryCard from './country-card';
 import PaginationBar from './pagination-bar';
 
 export default function CountryTable() {
-  const FIELDSQUERY = "name,capital,population,region,flags";
+  const FIELDSQUERY = "name,capital,population,region,flags,cca3";
   const PERPAGE = 12;
 
   const searchParams = useSearchParams()
@@ -26,7 +26,7 @@ export default function CountryTable() {
   const debouncedName = useDebounce(name, 1000);
 
   const { data: allCountryQuery } = useGetAllCountry(FIELDSQUERY, !isSearched);
-  const { data: countryQuery } = useGetCountry(debouncedName || "", FIELDSQUERY, isSearched);
+  const { data: countryQuery } = useGetCountryByName(debouncedName || "", FIELDSQUERY, isSearched);
 
   let filteredCountry: CountryType[] | undefined;
   if (!debouncedName) {
@@ -46,9 +46,9 @@ export default function CountryTable() {
   return (
     <div>
       <div className="grid grid-cols-4 gap-8">
-        {paginatedData?.map((data, index) => {
+        {paginatedData?.map((data) => {
           return (
-            <CountryCard key={index} name={data.name.official} image={data.flags.svg} region={data.region} capital={data.capital} population={data.population} />
+            <CountryCard key={data.cca3} code={data.cca3} name={data.name.common} image={data.flags.svg} region={data.region} capital={data.capital} population={data.population} imageAlt={data.flags.alt} />
           )
         })}
       </div>

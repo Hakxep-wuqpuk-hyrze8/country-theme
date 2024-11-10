@@ -5,7 +5,7 @@ interface getCountryResponse {
   data: Array<CountryType>
 };
 
-export const useGetCountry = (name: string, fields: string, enabled?: boolean) => {
+export const useGetCountryByName = (name: string, fields: string, enabled?: boolean) => {
   return useQuery<getCountryResponse, Error>({  
     queryKey: [name],
     queryFn: async () => {
