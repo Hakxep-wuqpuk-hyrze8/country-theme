@@ -9,6 +9,7 @@ import { useGetAllCountry } from '../api/use-get-all-country';
 import { useGetCountryByName } from '../api/use-get-country-by-name';
 import CountryCard from './country-card';
 import PaginationBar from './pagination-bar';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function CountryTable() {
   const FIELDSQUERY = "name,capital,population,region,flags,cca3";
@@ -25,8 +26,20 @@ export default function CountryTable() {
   const isSearched = !!name;
   const debouncedName = useDebounce(name, 1000);
 
-  const { data: allCountryQuery } = useGetAllCountry(FIELDSQUERY, !isSearched);
-  const { data: countryQuery } = useGetCountryByName(debouncedName || "", FIELDSQUERY, isSearched);
+  const { data: allCountryQuery, isLoading: isAllCountryQueryLoading } = useGetAllCountry(FIELDSQUERY, !isSearched);
+  const { data: countryQuery, isLoading: isCountryQueryLoading } = useGetCountryByName(debouncedName || "", FIELDSQUERY, isSearched);
+
+  if (isAllCountryQueryLoading || isCountryQueryLoading) {
+    return (
+      <div className="grid grid-cols-4 gap-8">
+        {Array.from({ length: PERPAGE }).map((_, i) => {
+          return (
+            <Skeleton key={i} className="w-[330px] h-[400px]" />
+          )
+        })}
+      </div>
+    );
+  }
 
   let filteredCountry: CountryType[] | undefined;
   if (!debouncedName) {
@@ -44,7 +57,7 @@ export default function CountryTable() {
   const paginatedData = filteredCountry?.slice((page - 1) * PERPAGE, page * PERPAGE);
 
   return (
-    <div>
+    <div className="size-full">
       <div className="grid grid-cols-4 gap-8">
         {paginatedData?.map((data) => {
           return (

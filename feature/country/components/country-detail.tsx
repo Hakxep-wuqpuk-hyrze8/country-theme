@@ -7,6 +7,7 @@ import { useGetCountryDetail } from '@/feature/country/api/use-get-country-detai
 import { useParams } from 'next/navigation';
 import { useGetCountryByCodes } from '../api/use-get-country-by-codes';
 import { Badge } from '@/components/ui/badge';
+import { Skeleton } from '@/components/ui/skeleton';
 
 
 export default function CountryDetail() {
@@ -23,8 +24,13 @@ export default function CountryDetail() {
 
   if (isGetCountryDetailLoading || isGetBorderCountryLoading) {
     return (
-      <div>
-        Loading...
+      <div className="size-full flex justify-between">
+        <Skeleton className="w-5/12 h-[400px] rounded-lg" />
+        <div className="w-6/12 flex flex-col gap-y-8">
+          <Skeleton className="h-[48px] w-[120px]" />
+          <Skeleton className="h-[180px] w-4/5" />
+          <Skeleton className="h-[80px] w-4/5" />
+        </div>
       </div>
     )
   }
@@ -52,7 +58,7 @@ export default function CountryDetail() {
       </div>
 
       <div className="w-6/12 flex flex-col gap-y-8">
-        <h1 className="w-[400px] text-4xl font-bold text-darkText">{countryDetail.name.common}</h1>
+        <h1 className="max-w-[400px] text-4xl font-bold text-darkText">{countryDetail.name.common}</h1>
 
         <table className="grid grid-cols-2 justify-between gap-x-6 text-darkText text-lg font-bold">
           <ul className="flex flex-col gap-y-1 flex-wrap">

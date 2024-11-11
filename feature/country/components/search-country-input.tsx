@@ -22,7 +22,7 @@ export default function SearchCountryInput({ onClickHandler }: SearchCountryInpu
   }
 
   return (
-    <div className="flex items-center justify-center gap-x-2 bg-white shadow-md px-4">
+    <div className="flex items-center justify-center gap-x-2 bg-white shadow-md px-4 select-none">
       <IoSearchSharp className="size-6 text-muted-foreground" />
       <Input
         type="text"
