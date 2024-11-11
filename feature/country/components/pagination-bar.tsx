@@ -3,6 +3,7 @@
 import React from 'react'
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
 import { ParsedUrlQueryInput } from 'querystring';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 interface PaginationBarProps {
   currentPage: number;
@@ -38,7 +39,7 @@ export default function PaginationBar({ currentPage, totalPages, queryParams }: 
     return null;
   }
 
-  if (totalPages <= 6) {
+  if (currentPage > totalPages || totalPages <= 6) {
     return (
       <Pagination className="text-darkText font-semibold p-7">
         <PaginationContent>

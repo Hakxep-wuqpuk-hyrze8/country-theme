@@ -1,15 +1,13 @@
 "use client"
 
-import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 import useDebounce from '@/hooks/use-debounce';
-import Link from 'next/link';
-import { useParams, usePathname, useSearchParams } from 'next/navigation';
-import { parseAsInteger, useQueryState } from 'nuqs';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { useGetAllCountry } from '../api/use-get-all-country';
 import { useGetCountryByName } from '../api/use-get-country-by-name';
 import CountryCard from './country-card';
 import PaginationBar from './pagination-bar';
-import { Skeleton } from '@/components/ui/skeleton';
+import Image from 'next/image';
 
 export default function CountryTable() {
   const FIELDSQUERY = "name,capital,population,region,flags,cca3";
@@ -54,14 +52,26 @@ export default function CountryTable() {
 
   const totalItems = filteredCountry?.length || 0;
   const totalPages = Math.ceil(totalItems / PERPAGE);
-  const paginatedData = filteredCountry?.slice((page - 1) * PERPAGE, page * PERPAGE);
+  const paginatedData = Array.isArray(filteredCountry)
+    ? filteredCountry.slice((page - 1) * PERPAGE, page * PERPAGE)
+    : null;
+
+  if (!paginatedData || page > totalPages) {
+    return (
+      <div className="h-full w-full flex flex-col gap-y-8 items-center justify-center">
+        <Image src="/nodata.svg" alt="No Data" width="210" height="240" className="object-cover" />
+        <p className="text-xl font-bold text-muted-foreground">No Country found!</p>
+        <PaginationBar currentPage={page} totalPages={totalPages} queryParams={queryParams} />
+      </div>
+    );
+  }
 
   return (
     <div className="size-full">
       <div className="grid grid-cols-4 gap-8">
         {paginatedData?.map((data) => {
           return (
-            <CountryCard key={data.cca3} code={data.cca3} name={data.name.common} image={data.flags.svg} region={data.region} capital={data.capital} population={data.population} imageAlt={data.flags.alt} />
+            <CountryCard key={data.cca3} code={data.cca3} name={data.name.official} image={data.flags.svg} region={data.region} capital={data.capital} population={data.population} imageAlt={data.flags.alt} />
           )
         })}
       </div>

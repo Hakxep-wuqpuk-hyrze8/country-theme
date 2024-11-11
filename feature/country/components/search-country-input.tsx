@@ -12,15 +12,13 @@ declare type SearchCountryInputProps = {
 export default function SearchCountryInput({ onClickHandler }: SearchCountryInputProps) {
   const [name, setName] = useQueryState(
     "name",
-    parseAsString.withDefault("").withOptions({ clearOnDefault: true })
+    parseAsString.withDefault("").withOptions({ clearOnDefault: true, history: 'push' })
   )
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    onClickHandler && onClickHandler(e.target.value);
+    if (onClickHandler) onClickHandler(e.target.value);
   }
-
   return (
     <div className="flex items-center justify-center gap-x-2 bg-white shadow-md px-4 select-none">
       <IoSearchSharp className="size-6 text-muted-foreground" />

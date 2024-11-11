@@ -4,7 +4,7 @@ import SearchCountryInput from '@/feature/country/components/search-country-inpu
 
 export default async function Page() {
   return (
-    <main className="bg-lightBackground flex flex-col p-7">
+    <main className="min-h-screen bg-lightBackground flex flex-col p-7">
       <div className="flex justify-between mb-7">
         <SearchCountryInput />
         <RegionSelector />
