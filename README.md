@@ -10,6 +10,7 @@
   - [建置工具](#建置工具)
   - [學習到的](#學習到的)
   - [未來開發計畫](#未來開發計畫)
+  - [資源](#資源)
 - [作者](#作者)
 - [致謝](#致謝)
 
@@ -67,6 +68,11 @@
 - 改善可及性和移動設備的響應式設計，確保應用在各設備上的流暢運行。
 - 擴展應用功能，例如根據人口、面積等條件排序國家。
 - 進一步探索 @tanstack/query，改善快取管理、分頁和伺服器端狀態的處理。
+
+### 資源
+
+- Integrate and Customize Tailwind CSS Dark Mode in a Next.js Project [Link](https://prismic.io/blog/tailwind-css-darkmode-tutorial)
+
 
 ## 作者
 
