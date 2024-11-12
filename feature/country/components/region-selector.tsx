@@ -36,7 +36,7 @@ export default function RegionSelector() {
           role="combobox"
           aria-expanded={open}
           className={cn(
-            "w-[240px] p-6 justify-between text-darkText select-none shadow-md rounded-none",
+            "w-[240px] p-6 justify-between text-darkText select-none shadow-md rounded-none dark:bg-darkBlue dark:text-white dark:hover:bg-darkBackground",
             region === "" ? "font-medium" : "font-semibold"
           )}
         >
@@ -45,7 +45,7 @@ export default function RegionSelector() {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[240px] p-0">
-        <Command>
+        <Command className="dark:bg-darkBlue dark:text-white">
           <CommandInput placeholder="Search Region..." />
           <CommandList>
             <CommandEmpty>No Region found.</CommandEmpty>
@@ -58,6 +58,7 @@ export default function RegionSelector() {
                     setRegion(currentValue === region ? "" : currentValue)
                     setOpen(false)
                   }}
+                  className="dark:hover:bg-darkBackground"
                 >
                   {uniRegion}
                   <Check

@@ -49,6 +49,7 @@ const PaginationLink = ({
   <Link
     aria-current={isActive ? "page" : undefined}
     className={cn(
+      "dark:hover:bg-darkBlue",
       buttonVariants({
         variant: isActive ? "outline" : "ghost",
         size,
@@ -67,7 +68,7 @@ const PaginationPrevious = ({
   <PaginationLink
     aria-label="Go to previous page"
     size="default"
-    className={cn("text-darkText", className)}
+    className={cn("text-darkText dark:text-white", className)}
     {...props}
   >
     <FaAngleLeft className="h-8 w-8" />
@@ -82,7 +83,7 @@ const PaginationNext = ({
   <PaginationLink
     aria-label="Go to next page"
     size="default"
-    className={cn("text-darkText", className)}
+    className={cn("text-darkText dark:text-white", className)}
     {...props}
   >
     <FaAngleRight className="h-8 w-8" />

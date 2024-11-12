@@ -19,7 +19,7 @@ export default function CountryDetailLayout({
           type="button"
           variant="outline"
           size="lg"
-          className="text-darkText font-semibold text-lg shadow-md"
+          className="text-darkText font-semibold text-lg shadow-md dark:bg-darkBlue dark:text-white dark:hover:bg-darkBackground"
         >
           <FaArrowLeft className="size-4" />
           Back

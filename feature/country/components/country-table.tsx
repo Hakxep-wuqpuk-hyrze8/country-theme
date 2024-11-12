@@ -29,7 +29,7 @@ export default function CountryTable() {
 
   if (isAllCountryQueryLoading || isCountryQueryLoading) {
     return (
-      <div className="grid grid-cols-4 gap-8">
+      <div className="grid grid-cols-4 gap-8 pb-8">
         {Array.from({ length: PERPAGE }).map((_, i) => {
           return (
             <Skeleton key={i} className="w-[330px] h-[400px]" />

@@ -1,20 +1,17 @@
 "use client"
 
 import Link from "next/link";
-import { LuMoon } from "react-icons/lu";
+import ToggleModeButton from './toggle-mode-button';
 
 export default function Header() {
   return (
-    <nav className="bg-white w-full flex justify-between items-center p-7 drop-shadow-md">
+    <nav className="bg-white dark:bg-darkBlue w-full flex justify-between items-center p-7 drop-shadow-md">
       <Link href="/">
-        <h1 className="text-xl font-extrabold text-darkText">
+        <h1 className="text-xl font-extrabold text-darkText dark:text-white">
           Where In The World?
         </h1>
       </Link>
-      <div className="flex justify-center items-center gap-x-1">
-        <LuMoon className="size-4 text-muted-foreground" />
-        <p className="text-muted-foreground font-semibold text-sm">Dark Mode</p>
-      </div>
+      <ToggleModeButton />
     </nav>
   )
 }

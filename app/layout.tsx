@@ -11,7 +11,7 @@ const nunitoSans = Nunito_Sans({
 
 export const metadata: Metadata = {
   title: "REST Countries API Explorer",
-  description: "提供來自 API 的全球國家資料，支援搜尋、篩選和詳細查看。",
+  description: "提供來自 Restcountry 的全球國家資料，支援搜尋、篩選和詳細查看。",
 };
 
 export default function RootLayout({
@@ -27,7 +27,7 @@ export default function RootLayout({
         className={`${nunitoSans.className} antialiased`}
       >
         <QueryProviders>
-          <div className="min-h-screen h-screen">
+          <div className="min-h-screen dark:bg-darkBackground">
             <div className="size-full flex flex-col">
               <Header />
               {children}

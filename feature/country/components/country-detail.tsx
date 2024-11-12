@@ -58,63 +58,63 @@ export default function CountryDetail() {
       </div>
 
       <div className="w-6/12 flex flex-col gap-y-8">
-        <h1 className="max-w-[400px] text-4xl font-bold text-darkText">{countryDetail.name.common}</h1>
+        <h1 className="max-w-[400px] text-4xl font-bold text-darkText dark:text-white">{countryDetail.name.common}</h1>
 
         <table className="grid grid-cols-2 justify-between gap-x-6 text-darkText text-lg font-bold">
-          <ul className="flex flex-col gap-y-1 flex-wrap">
+          <ul className="flex flex-col gap-y-1 flex-wrap dark:text-white">
             <li>
               Native Name:
-              <span className="font-semibold text-neutral-600"> {nativeNames}
+              <span className="font-semibold text-neutral-600 dark:text-neutral-300"> {nativeNames}
               </span>
             </li>
             <li>
               Population:
-              <span className="font-semibold text-neutral-600"> {countryDetail.population}
+              <span className="font-semibold text-neutral-600 dark:text-neutral-300"> {countryDetail.population}
               </span>
             </li>
             <li>
               Region:
-              <span className="font-semibold text-neutral-600"> {countryDetail.region}
+              <span className="font-semibold text-neutral-600 dark:text-neutral-300"> {countryDetail.region}
               </span>
             </li>
             <li>
               Sub Region:
-              <span className="font-semibold text-neutral-600"> {countryDetail.region}
+              <span className="font-semibold text-neutral-600 dark:text-neutral-300"> {countryDetail.region}
               </span>
             </li>
             <li>
               Capital:
-              <span className="font-semibold text-neutral-600"> {countryDetail.capital}
+              <span className="font-semibold text-neutral-600 dark:text-neutral-300"> {countryDetail.capital}
               </span>
             </li>
           </ul>
-          <ul className="flex flex-col gap-y-1 flex-wrap">
+          <ul className="flex flex-col gap-y-1 flex-wrap dark:text-white">
             <li>
               Top Level Domain:
-              <span className="font-semibold text-neutral-600"> {countryDetail.tld} </span>
+              <span className="font-semibold text-neutral-600 dark:text-neutral-300"> {countryDetail.tld} </span>
             </li>
             <li>
               Currencies:
-              <span className="font-semibold text-neutral-600"> {currencies} </span>
+              <span className="font-semibold text-neutral-600 dark:text-neutral-300"> {currencies} </span>
             </li>
             <li>
               Languages:
-              <span className="font-semibold text-neutral-600"> {languages} </span>
+              <span className="font-semibold text-neutral-600 dark:text-neutral-300"> {languages} </span>
             </li>
           </ul>
         </table>
 
         <div className="flex flex-wrap items-center gap-3 w-full" >
-          <span className="font-semibold text-darkText">Border Countries:</span>
+          <span className="font-bold text-lg text-darkText dark:text-white">Border Countries:</span>
           {borderCountryQuery ?
             borderCountryQuery.data.map((country) => {
               return (
-                <Badge variant="outline" className="flex items-center justify-center  text-center px-6 py-1 text-base rounded-sm">
+                <Badge variant="outline" className="flex font-bold items-center justify-center text-center px-6 py-1 text-base rounded-sm dark:text-neutral-300 dark:ring-2 dark:ring-white">
                   {country.name.common}
                 </Badge>
               )
             }) :
-            <span className="text-muted-foreground font-semibold"> None </span>
+            <span className="text-muted-foreground font-semibold dark:text-white"> None </span>
           }
         </div>
       </div>
