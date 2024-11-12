@@ -37,7 +37,7 @@ export default function RegionSelector() {
           aria-expanded={open}
           className={cn(
             "w-[240px] p-6 justify-between text-darkText select-none shadow-md rounded-none dark:bg-darkBlue dark:text-white dark:hover:bg-darkBackground",
-            region === "" ? "font-medium" : "font-semibold"
+            region === "" ? "font-medium text-muted-foreground dark:text-muted-foreground " : "font-semibold"
           )}
         >
           {region !== "" ? region : PLACEHOLDER}
