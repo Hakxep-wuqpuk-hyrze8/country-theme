@@ -4,12 +4,17 @@ import { ChangeEvent } from "react";
 import { IoSearchSharp } from "react-icons/io5";
 import { Input } from "../../../components/ui/input";
 import { useQueryState, parseAsString } from "nuqs";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 declare type SearchCountryInputProps = {
   onClickHandler?: (value: string) => void;
 };
 
 export default function SearchCountryInput({ onClickHandler }: SearchCountryInputProps) {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
   const [name, setName] = useQueryState(
     "name",
     parseAsString.withDefault("").withOptions({ clearOnDefault: true, history: 'push' })
@@ -17,6 +22,9 @@ export default function SearchCountryInput({ onClickHandler }: SearchCountryInpu
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
+    const params = new URLSearchParams(searchParams);
+    params.set('page', '1');
+    replace(`${pathname}?${params.toString()}`);
     if (onClickHandler) onClickHandler(e.target.value);
   }
   return (

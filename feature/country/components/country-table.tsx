@@ -46,7 +46,7 @@ export default function CountryTable() {
     filteredCountry = countryQuery?.data;
   }
 
-  if (region && filteredCountry) {
+  if (region && filteredCountry && Array.isArray(filteredCountry)) {
     filteredCountry = filteredCountry.filter((country) => country.region === region);
   }
 
@@ -56,11 +56,11 @@ export default function CountryTable() {
     ? filteredCountry.slice((page - 1) * PERPAGE, page * PERPAGE)
     : null;
 
-  if (!paginatedData || page > totalPages) {
+  if (!paginatedData || paginatedData.length === 0) {
     return (
       <div className="h-full w-full flex flex-col gap-y-8 items-center justify-center">
         <Image src="/nodata.svg" alt="No Data" width="210" height="240" className="object-cover" />
-        <p className="text-xl font-bold text-muted-foreground">No Country found!</p>
+        <p className="text-xl font-bold text-red-500">No Country Found!</p>
         <PaginationBar currentPage={page} totalPages={totalPages} queryParams={queryParams} />
       </div>
     );
