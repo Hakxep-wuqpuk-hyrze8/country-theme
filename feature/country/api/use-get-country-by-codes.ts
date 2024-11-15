@@ -7,6 +7,9 @@ interface getAllCountryResponse {
       official: string
       common: string
     };
+    flags: {
+      svg: string
+    }
   }>
 };
 

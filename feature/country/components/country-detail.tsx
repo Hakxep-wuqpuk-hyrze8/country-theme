@@ -8,10 +8,9 @@ import { useParams } from 'next/navigation';
 import { useGetCountryByCodes } from '../api/use-get-country-by-codes';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
-
+import { GET_COUNTRY_DETAIL_FIELDS_QUERY } from '@/app/constants';
 
 export default function CountryDetail() {
-  const GET_COUNTRY_DETAIL_FIELDS_QUERY = "flags,cca3,name,capital,population,region,subregion,tld,currencies,languages,borders"
   const GET_BORDER_COUNTRY_FIELDS_QUERY = "name";
   const code = useParams().code as string;
   const { data: allCountryDetailQuery, isLoading: isGetCountryDetailLoading } = useGetCountryDetail(code, GET_COUNTRY_DETAIL_FIELDS_QUERY);
@@ -42,6 +41,8 @@ export default function CountryDetail() {
   }
 
   const countryDetail = allCountryDetailQuery.data[0];
+
+  // create utils tool for 
   const nativeNames = Object.values(countryDetail.name.nativeName).map((ns) => ns.common).join(", ");
   const currencies = Object.values(countryDetail.currencies).map((currency) => currency.name).join(", ");
   const languages = Object.values(countryDetail.languages).join(", ");
@@ -61,6 +62,7 @@ export default function CountryDetail() {
         <h1 className="max-w-[400px] text-4xl font-bold text-darkText dark:text-white">{countryDetail.name.common}</h1>
 
         <table className="grid grid-cols-2 justify-between gap-x-6 text-darkText text-lg font-bold">
+          {/* create render function */}
           <ul className="flex flex-col gap-y-1 flex-wrap dark:text-white">
             <li>
               Native Name:
@@ -105,7 +107,10 @@ export default function CountryDetail() {
         </table>
 
         <div className="flex flex-wrap items-center gap-3 w-full" >
-          <span className="font-bold text-lg text-darkText dark:text-white">Border Countries:</span>
+          <span className="font-bold text-lg text-darkText dark:text-white">
+            Border Countries:
+          </span>
+
           {borderCountryQuery ?
             borderCountryQuery.data.map((country) => {
               return (
@@ -116,6 +121,7 @@ export default function CountryDetail() {
             }) :
             <span className="text-muted-foreground font-semibold dark:text-white"> None </span>
           }
+
         </div>
       </div>
     </main>

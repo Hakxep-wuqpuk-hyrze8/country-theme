@@ -36,7 +36,7 @@ export default function RegionSelector() {
           role="combobox"
           aria-expanded={open}
           className={cn(
-            "w-[240px] p-6 justify-between text-darkText select-none shadow-md rounded-none dark:bg-darkBlue dark:text-white dark:hover:bg-darkBackground",
+            "w-[240px] p-6 justify-between text-darkText select-none shadow-md rounded-none bg-white dark:bg-darkBlue dark:text-white dark:hover:bg-darkBackground transition-none",
             region === "" ? "font-medium text-muted-foreground dark:text-muted-foreground " : "font-semibold"
           )}
         >

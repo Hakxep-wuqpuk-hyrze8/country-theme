@@ -10,7 +10,10 @@ const nunitoSans = Nunito_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "REST Countries API Explorer",
+  title: {
+    default: "Where in the world?",
+    template: "%s - where in the world"
+  },
   description: "提供來自 Restcountry 的全球國家資料，支援搜尋、篩選和詳細查看。",
 };
 
