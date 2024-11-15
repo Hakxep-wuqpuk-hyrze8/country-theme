@@ -2,7 +2,7 @@
 
 import { Skeleton } from '@/components/ui/skeleton';
 import useDebounce from '@/hooks/use-debounce';
-import { useParams, useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useGetAllCountry } from '../api/use-get-all-country';
 import { useGetCountryByName } from '../api/use-get-country-by-name';
 import CountryCard from './country-card';
@@ -16,8 +16,8 @@ export default function CountryTable() {
   const searchParams = useSearchParams()
   const name = searchParams.get('name')
   const region = searchParams.get('region')
-  const pageIdParam = useParams().pageId as string;
-  const page = pageIdParam ? parseInt(pageIdParam, 10) : 1;
+  const pageQuery = searchParams.get('page')
+  const page = pageQuery ? parseInt(pageQuery, 10) : 1;
 
   const queryParams = Object.fromEntries(searchParams.entries());
 

@@ -12,7 +12,7 @@ import { parseAsString, useQueryState } from 'nuqs';
 export default function RegionSelector() {
   const FIELDSQUERY = "region";
   const PLACEHOLDER = "Filter by Region";
-  const { data: allCountryQuery, isError } = useGetCountryByRegion(FIELDSQUERY);
+  const { data: allCountryQuery, isLoading: isGetCountryLoading, isError } = useGetCountryByRegion(FIELDSQUERY);
 
   const [open, setOpen] = React.useState<boolean>(false)
 
@@ -35,6 +35,7 @@ export default function RegionSelector() {
           variant="outline"
           role="combobox"
           aria-expanded={open}
+          disabled={isGetCountryLoading}
           className={cn(
             "w-[240px] p-6 justify-between text-darkText select-none shadow-md rounded-none bg-white dark:bg-darkBlue dark:text-white dark:hover:bg-darkBackground transition-none",
             region === "" ? "font-medium text-muted-foreground dark:text-muted-foreground " : "font-semibold"

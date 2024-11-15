@@ -3,7 +3,6 @@
 import React from 'react'
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
 import { ParsedUrlQueryInput } from 'querystring';
-import { useRouter, useSearchParams } from 'next/navigation';
 
 interface PaginationBarProps {
   currentPage: number;
@@ -14,8 +13,11 @@ interface PaginationBarProps {
 export default function PaginationBar({ currentPage, totalPages, queryParams }: PaginationBarProps) {
   const handleNavigation = (page: number) => {
     return {
-      pathname: `/page/${page}`,
-      query: queryParams
+      pathname: "/",
+      query: {
+        ...queryParams,
+        page: page,
+      }
     };
   };
 
