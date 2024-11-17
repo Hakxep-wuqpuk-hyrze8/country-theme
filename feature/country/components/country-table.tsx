@@ -1,59 +1,35 @@
-"use client"
-
-import { Skeleton } from '@/components/ui/skeleton';
-import useDebounce from '@/hooks/use-debounce';
 import { useSearchParams } from 'next/navigation';
-import { useGetAllCountry } from '../api/use-get-all-country';
-import { useGetCountryByName } from '../api/use-get-country-by-name';
 import CountryCard from './country-card';
 import PaginationBar from './pagination-bar';
 import Image from 'next/image';
+import { getAllCountries, getCountriesByName } from '../query';
+import { TOTAL_CARD_PER_PAGE } from '@/lib/constants';
 
-export default function CountryTable() {
+export default async function CountryTable() {
   const FIELDSQUERY = "name,capital,population,region,flags,cca3";
-  const PERPAGE = 12;
-
   const searchParams = useSearchParams()
-  const name = searchParams.get('name')
-  const region = searchParams.get('region')
-  const pageQuery = searchParams.get('page')
+  const queryParams = Object.fromEntries(searchParams.entries());
+  const name = queryParams["name"];
+  const region = queryParams["region"];
+  const pageQuery = queryParams["page"];
   const page = pageQuery ? parseInt(pageQuery, 10) : 1;
 
-  const queryParams = Object.fromEntries(searchParams.entries());
+  let countries: Array<CountryType>
 
-  const isSearched = !!name;
-  const debouncedName = useDebounce(name, 1000);
-
-  const { data: allCountryQuery, isLoading: isAllCountryQueryLoading } = useGetAllCountry(FIELDSQUERY, !isSearched);
-  const { data: countryQuery, isLoading: isCountryQueryLoading } = useGetCountryByName(debouncedName || "", FIELDSQUERY, isSearched);
-
-  if (isAllCountryQueryLoading || isCountryQueryLoading) {
-    return (
-      <div className="grid grid-cols-4 gap-8 pb-8">
-        {Array.from({ length: PERPAGE }).map((_, i) => {
-          return (
-            <Skeleton key={i} className="w-[330px] h-[400px]" />
-          )
-        })}
-      </div>
-    );
-  }
-
-  let filteredCountry: CountryType[] | undefined;
-  if (!debouncedName) {
-    filteredCountry = allCountryQuery?.data;
+  if (name) {
+    countries = await getCountriesByName(name, FIELDSQUERY);
   } else {
-    filteredCountry = countryQuery?.data;
+    countries = await getAllCountries(FIELDSQUERY);
   }
 
-  if (region && filteredCountry && Array.isArray(filteredCountry)) {
-    filteredCountry = filteredCountry.filter((country) => country.region === region);
+  if (region && countries && Array.isArray(countries)) {
+    countries = countries.filter((country) => country.region === region);
   }
 
-  const totalItems = filteredCountry?.length || 0;
-  const totalPages = Math.ceil(totalItems / PERPAGE);
-  const paginatedData = Array.isArray(filteredCountry)
-    ? filteredCountry.slice((page - 1) * PERPAGE, page * PERPAGE)
+  const totalItems = countries?.length || 0;
+  const totalPages = Math.ceil(totalItems / TOTAL_CARD_PER_PAGE);
+  const paginatedData = Array.isArray(countries)
+    ? countries.slice((page - 1) * TOTAL_CARD_PER_PAGE, page * TOTAL_CARD_PER_PAGE)
     : null;
 
   if (!paginatedData || paginatedData.length === 0) {
@@ -61,7 +37,6 @@ export default function CountryTable() {
       <div className="h-full w-full flex flex-col gap-y-8 items-center justify-center">
         <Image src="/nodata.svg" alt="No Data" width="210" height="240" className="object-cover" />
         <p className="text-xl font-bold text-red-500">No Country Found!</p>
-        <PaginationBar currentPage={page} totalPages={totalPages} queryParams={queryParams} />
       </div>
     );
   }

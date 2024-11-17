@@ -60,6 +60,7 @@
 - 使用 useDebounce 實現防抖邏輯：我使用 useDebounce 來提高搜尋輸入效率，減少不必要的 API 請求，並通過等待用戶停止輸入後再發送請求來提升性能。
 - 使用 Hono 框架構建 API：我將 Hono 框架與 @tanstack/query 結合，快速搭建了 API 路由和請求處理，使其運行更加高效。
 - 實現光明/黑暗模式切換功能，讓使用者可以根據個人喜好選擇顯示模式，提升用者體驗。
+- Data Fetching and Caching
 
 ### 未來開發計畫
 

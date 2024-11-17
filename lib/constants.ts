@@ -1,0 +1,1 @@
+export const TOTAL_CARD_PER_PAGE = 12; 
