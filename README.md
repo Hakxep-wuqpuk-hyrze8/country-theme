@@ -55,12 +55,8 @@
 
 在這個專案中，我學到了幾個有價值的概念和工具：
 
-- 使用 @tanstack/query 進行數據抓取：我使用它來抓取國家資料並處理不同的加載狀態，同時管理 React 應用中的遠端數據。
-- 使用 nuqs 進行全域狀態管理：我學會了使用 nuqs 來管理 React 應用中的全域狀態，提供了一種輕鬆同步多個元件狀態的方式。
-- 使用 useDebounce 實現防抖邏輯：我使用 useDebounce 來提高搜尋輸入效率，減少不必要的 API 請求，並通過等待用戶停止輸入後再發送請求來提升性能。
-- 使用 Hono 框架構建 API：我將 Hono 框架與 @tanstack/query 結合，快速搭建了 API 路由和請求處理，使其運行更加高效。
+- 關於 Next 中 Data Fetching and Caching
 - 實現光明/黑暗模式切換功能，讓使用者可以根據個人喜好選擇顯示模式，提升用者體驗。
-- Data Fetching and Caching
 
 ### 未來開發計畫
 
