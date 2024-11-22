@@ -1,7 +1,6 @@
 import { TOTAL_CARD_PER_PAGE } from "@/lib/constants"
 import { Skeleton } from "./ui/skeleton"
 
-
 export function CardSkeleton() {
   return <Skeleton className="w-[330px] h-[400px]" />
 }

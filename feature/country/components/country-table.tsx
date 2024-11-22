@@ -13,19 +13,18 @@ interface CountryTableProps {
 export default async function CountryTable({
   name, region, page
 }: CountryTableProps) {
-  const FIELDSQUERY = "name,capital,population,region,flags,cca3";
   const queryParams = {
-    name: name,
-    region: region,
-    page: page
-  }
+    ...(name && name !== "" && { name }),
+    ...(region && region !== "" && { region }),
+    ...(page && { page })
+  };
 
   let countries: Array<CountryType>
 
   if (name) {
-    countries = await getCountriesByName(name, FIELDSQUERY);
+    countries = await getCountriesByName(name);
   } else {
-    countries = await getAllCountries(FIELDSQUERY);
+    countries = await getAllCountries();
   }
 
   if (region && countries && Array.isArray(countries)) {

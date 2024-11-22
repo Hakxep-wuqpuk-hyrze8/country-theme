@@ -1,10 +1,11 @@
+import { FIELDSQUERY, GET_BORDER_COUNTRY_FIELDS_QUERY, GET_COUNTRY_DETAIL_FIELDS_QUERY } from "@/app/constants";
 import { RESTCOUNTRY_API } from "@/config";
 
-export const getAllCountries = async (fields: string) => {
+export const getAllCountries = async (): Promise<Array<CountryType>> => {
   try {
-    const url = `${RESTCOUNTRY_API}/all?fields=${fields}`
+    const url = `${RESTCOUNTRY_API}/all?fields=${FIELDSQUERY}`
     const response = await fetch(url);
-    const data = await response.json();
+    const data: Array<CountryType> = await response.json();
     return data;
   } catch (error) {
     console.log('Fetch Error', error);
@@ -12,11 +13,11 @@ export const getAllCountries = async (fields: string) => {
   }
 };
 
-export const getCountryDetail = async (cca3: string, fields: string) => {
+export const getCountryDetail = async (cca3: string): Promise<Array<CountryDetailType>> => {
   try {
-    const url = `${RESTCOUNTRY_API}/alpha?codes=${cca3}&fields=${fields}`
+    const url = `${RESTCOUNTRY_API}/alpha?codes=${cca3}&fields=${GET_COUNTRY_DETAIL_FIELDS_QUERY}`
     const response = await fetch(url);
-    const data = await response.json();
+    const data: Array<CountryDetailType> = await response.json();
     return data;
   } catch (error) {
     console.log('Fetch Error', error);
@@ -24,11 +25,23 @@ export const getCountryDetail = async (cca3: string, fields: string) => {
   }
 };
 
-export const getCountriesByName = async (name: string, fields: string) => {
+export const getBorderCountryByCode = async (cca3: string): Promise<Array<BorderCountryType>> => {
   try {
-    const url = `${RESTCOUNTRY_API}/name/${name}?fields=${fields}`
+    const url = `${RESTCOUNTRY_API}/alpha?codes=${cca3}&fields=${GET_BORDER_COUNTRY_FIELDS_QUERY}`
     const response = await fetch(url);
-    const data = await response.json();
+    const data: Array<BorderCountryType> = await response.json();
+    return data;
+  } catch (error) {
+    console.log('Fetch Error', error);
+    throw new Error('Failed to fetch countries.');
+  }
+};
+
+export const getCountriesByName = async (name: string): Promise<Array<CountryType>> => {
+  try {
+    const url = `${RESTCOUNTRY_API}/name/${name}?fields=${FIELDSQUERY}`
+    const response = await fetch(url);
+    const data: Array<CountryType> = await response.json();
     return data;
   } catch (error) {
     console.log('Fetch Error', error);

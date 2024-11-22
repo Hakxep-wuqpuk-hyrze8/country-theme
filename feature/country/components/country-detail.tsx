@@ -52,7 +52,9 @@ export default function CountryDetail({ countryDetail, borderCountry }: CountryD
         </div>
 
         <div className="flex flex-wrap items-center gap-3 w-full">
-          <span className="font-bold text-lg text-darkText dark:text-white">Border Countries:</span>
+          <span className="font-bold text-lg text-darkText dark:text-white">
+            Border Countries:
+          </span>
           {borderCountry.length > 0 ? (
             borderCountry.map((data) => (
               <Badge key={data.cca3} variant="outline" className="flex font-bold items-center justify-center text-center px-6 py-1 text-base rounded-sm dark:text-neutral-300 dark:ring-2 dark:ring-white">

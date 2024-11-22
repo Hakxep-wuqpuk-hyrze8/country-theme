@@ -1,3 +1,12 @@
+// Page And Components Props
+declare type CountryDetailProps = {
+  params: {
+    code: string;
+  };
+}
+
+
+// Data
 declare type CountryDetailType = {
   flags: {
     svg: string;
