@@ -5,7 +5,7 @@ import { ParsedUrlQueryInput } from 'querystring';
 interface PaginationBarProps {
   currentPage: number;
   totalPages: number;
-  queryParams: ParsedUrlQueryInput;
+  queryParams?: ParsedUrlQueryInput;
 };
 
 export default function PaginationBar({ currentPage, totalPages, queryParams }: PaginationBarProps) {

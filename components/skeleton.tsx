@@ -17,3 +17,20 @@ export function CardTableSkeleton() {
     </div>
   )
 }
+
+export function CountryDetailSkeleton() {
+  return (
+    <div className="size-full flex justify-between">
+      <Skeleton className="w-5/12 h-[400px] rounded-lg" />
+      <div className="w-6/12 flex flex-col gap-y-8">
+        <Skeleton className="h-[48px] w-[120px]" />
+        <Skeleton className="h-[180px] w-4/5" />
+        <Skeleton className="h-[80px] w-4/5" />
+      </div>
+    </div>
+  )
+}
+
+export function RegionSelectorSkeleton() {
+  return <Skeleton className="w-[240px] h-[60px]" />
+};

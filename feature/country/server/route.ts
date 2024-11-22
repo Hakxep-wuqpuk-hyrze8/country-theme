@@ -5,6 +5,21 @@ import { getAllCountrySchema, getCountryByRegionSchema, getCountryDetailsSchema,
 
 const app = new Hono()
   .get(
+    "/all",
+    zValidator("query", getAllCountrySchema),
+    async (c) => {
+      try {
+        const { fields } = c.req.valid("query");
+        const url = `${RESTCOUNTRY_API}/all?fields=${fields}`
+        const response = await fetch (url);
+        const data = await response.json();
+        return c.json({ data });
+      } catch (error) {
+         return c.json({ error: error }, 500);
+      }
+    }
+  )
+  .get(
     "/detail",
     zValidator("query", getCountryDetailsSchema),
     async (c) => {
@@ -29,21 +44,6 @@ const app = new Hono()
         const response = await fetch (url);
         const data = await response.json();
         return c.json({ data });  
-      } catch (error) {
-         return c.json({ error: error }, 500);
-      }
-    }
-  )
-  .get(
-    "/all",
-    zValidator("query", getAllCountrySchema),
-    async (c) => {
-      try {
-        const { fields } = c.req.valid("query");
-        const url = `${RESTCOUNTRY_API}/all?fields=${fields}`
-        const response = await fetch (url);
-        const data = await response.json();
-        return c.json({ data });
       } catch (error) {
          return c.json({ error: error }, 500);
       }

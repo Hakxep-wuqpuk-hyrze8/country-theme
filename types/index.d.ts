@@ -46,6 +46,14 @@ declare type CountryType = {
   cca3: string;
 };
 
+declare type BorderCountryType = {
+  name: {
+    official: string;
+    common: string;
+  }
+  cca3: string;
+}
+
 declare type RegionType = {
   region: string;
 };

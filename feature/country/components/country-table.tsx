@@ -1,18 +1,24 @@
-import { useSearchParams } from 'next/navigation';
 import CountryCard from './country-card';
 import PaginationBar from './pagination-bar';
 import Image from 'next/image';
 import { getAllCountries, getCountriesByName } from '../query';
 import { TOTAL_CARD_PER_PAGE } from '@/lib/constants';
 
-export default async function CountryTable() {
+interface CountryTableProps {
+  name?: string;
+  region?: string;
+  page: number;
+};
+
+export default async function CountryTable({
+  name, region, page
+}: CountryTableProps) {
   const FIELDSQUERY = "name,capital,population,region,flags,cca3";
-  const searchParams = useSearchParams()
-  const queryParams = Object.fromEntries(searchParams.entries());
-  const name = queryParams["name"];
-  const region = queryParams["region"];
-  const pageQuery = queryParams["page"];
-  const page = pageQuery ? parseInt(pageQuery, 10) : 1;
+  const queryParams = {
+    name: name,
+    region: region,
+    page: page
+  }
 
   let countries: Array<CountryType>
 
@@ -36,7 +42,7 @@ export default async function CountryTable() {
     return (
       <div className="h-full w-full flex flex-col gap-y-8 items-center justify-center">
         <Image src="/nodata.svg" alt="No Data" width="210" height="240" className="object-cover" />
-        <p className="text-xl font-bold text-red-500">No Country Found!</p>
+        <p className="text-xl font-bold text-red-400">No Country Found!</p>
       </div>
     );
   }

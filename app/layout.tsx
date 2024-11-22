@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Nunito_Sans } from "next/font/google";
-import Header from "@/components/header";
+import {
+  ClerkProvider,
+} from '@clerk/nextjs'
+
 import { QueryProviders } from "@/components/query-provider";
 
 const nunitoSans = Nunito_Sans({
@@ -23,21 +26,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-    >
-      <body
-        className={`${nunitoSans.className} antialiased`}
+    <ClerkProvider>
+      <html
+        lang="en"
       >
-        <QueryProviders>
-          <div className="min-h-screen dark:bg-darkBackground">
-            <div className="size-full flex flex-col">
-              <Header />
-              {children}
-            </div>
-          </div>
-        </QueryProviders>
-      </body>
-    </html>
+        <body
+          className={`${nunitoSans.className} antialiased`}
+        >
+          <QueryProviders>
+            {children}
+          </QueryProviders>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

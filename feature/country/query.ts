@@ -35,3 +35,20 @@ export const getCountriesByName = async (name: string, fields: string) => {
     throw new Error('Failed to fetch countries by name.');
   }
 };
+
+export const getAllRegions = async (): Promise<RegionType[]> => {
+  try {
+    const url = `${RESTCOUNTRY_API}/all?&fields=region`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data: RegionType[] = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Fetch Error', error);
+    throw new Error('Failed to fetch all regions.');
+  }
+};
