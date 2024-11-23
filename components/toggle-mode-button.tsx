@@ -2,10 +2,24 @@
 
 import { LuMoon } from 'react-icons/lu'
 import { Button } from './ui/button'
+import { useEffect } from 'react';
 
 export default function ToggleModeButton() {
+  useEffect(() => {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    }
+  }, []);
+
   const toggleTheme = () => {
-    document.documentElement.classList.toggle('dark')
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    }
   }
 
   return (
