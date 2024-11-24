@@ -41,7 +41,7 @@ export default function PaginationBar({ currentPage, totalPages, queryParams }: 
 
   if (currentPage > totalPages || totalPages <= 6) {
     return (
-      <Pagination className="text-darkText font-bold p-7 dark:bg-darkBackground dark:text-white">
+      <Pagination className="text-texts-dark font-bold p-7 dark:bg-backgrounds-dark dark:text-texts-light">
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious size="lg" href={toPrevPage(currentPage)} />
@@ -62,7 +62,7 @@ export default function PaginationBar({ currentPage, totalPages, queryParams }: 
   }
 
   return (
-    <Pagination className="text-darkText font-bold p-7 dark:bg-darkBackground dark:text-white">
+    <Pagination className="text-texts-dark font-bold p-7 dark:bg-backgrounds-dark dark:text-texts-light">
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious size="lg" href={toPrevPage(currentPage)} />

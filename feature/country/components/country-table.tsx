@@ -13,6 +13,7 @@ interface CountryTableProps {
 export default async function CountryTable({
   name, region, page
 }: CountryTableProps) {
+  // If there is no name, region or page, don't display the query parameters
   const queryParams = {
     ...(name && name !== "" && { name }),
     ...(region && region !== "" && { region }),
@@ -48,7 +49,7 @@ export default async function CountryTable({
 
   return (
     <div className="size-full">
-      <div className="grid grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {paginatedData?.map((data) => {
           return (
             <CountryCard key={data.cca3} code={data.cca3} name={data.name.official} image={data.flags.svg} region={data.region} capital={data.capital} population={data.population} imageAlt={data.flags.alt} />

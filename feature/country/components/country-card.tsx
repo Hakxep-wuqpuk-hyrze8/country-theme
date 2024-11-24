@@ -19,25 +19,25 @@ export default function CountryCard({ code, name, population, region, capital, i
   const router = useRouter();
 
   const handleNavigation = (code: string) => {
-    router.push(`/country/${code}`)
+    router.push(`/${code}`)
   };
 
   return (
-    <Card onClick={() => handleNavigation(code)} className="rounded-lg shadow-md cursor-pointer dark:bg-darkBlue">
-      <div className="relative w-full h-[220px] rounded-lg">
+    <Card onClick={() => handleNavigation(code)} className="rounded-lg shadow-md cursor-pointer dark:bg-blue-900">
+      <div className="relative w-full h-[260px] sm:h-[300px] md:h-[220px] xl:h-[220px] rounded-lg">
         <Image
           src={image}
           alt={imageAlt}
           fill
-          className="object-cover rounded-t-lg"
+          className="object-fill lg:object-cover rounded-t-lg"
         />
       </div>
       <CardHeader>
-        <CardTitle className="text-darkText dark:text-white font-bold">
+        <CardTitle className="text-texts-dark dark:text-texts-light font-bold">
           {name}
         </CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-col text-darkText dark:text-white font-semibold">
+      <CardContent className="flex flex-col text-texts-dark dark:text-texts-light font-semibold">
         <p>Population: <span className='text-neutral-700 dark:text-neutral-300'>{population}</span> </p>
         <p>Region: <span className='text-neutral-700 dark:text-neutral-300'>{region}</span> </p>
         <p>Capital:{" "}

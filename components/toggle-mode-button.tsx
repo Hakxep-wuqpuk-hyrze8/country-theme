@@ -25,12 +25,12 @@ export default function ToggleModeButton() {
   return (
     <Button
       variant="ghost"
-      className="dark:bg-darkBlue dark:hover:bg-darkBackground"
+      className="dark:bg-blue-900 dark:hover:bg-backgrounds-dark"
       onClick={toggleTheme}
     >
       <div className="flex justify-center items-center gap-x-1.5">
-        <LuMoon className="size-4 text-muted-foreground dark:text-white" />
-        <p className="text-muted-foreground dark:text-white font-semibold text-sm">Dark Mode</p>
+        <LuMoon className="size-4 text-muted-foreground dark:text-texts-light" />
+        <p className="text-muted-foreground dark:text-texts-light font-semibold text-sm">Dark Mode</p>
       </div>
     </Button>
   )

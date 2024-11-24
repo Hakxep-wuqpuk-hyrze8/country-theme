@@ -27,11 +27,11 @@ export default function SearchCountryInput({ onClickHandler }: SearchCountryInpu
   }, 300);
 
   return (
-    <div className="flex items-center justify-center gap-x-2 bg-white shadow-md px-4 select-none dark:bg-darkBlue dark:text-white">
-      <IoSearchSharp className="size-6 text-muted-foreground dark:text-white" />
+    <div className="flex items-center justify-center gap-x-2 bg-white shadow-md px-4 select-none dark:bg-blue-900 dark:text-texts-light">
+      <IoSearchSharp className="size-6 text-muted-foreground dark:text-texts-light" />
       <Input
         type="text"
-        className="text-darkGray dark:bg-darkBlue dark:text-white"
+        className="text-darkGray dark:bg-blue-900 dark:text-texts-light"
         onChange={(e) => onChangeHandler(e.target.value)}
         placeholder="Search for a country..."
         defaultValue={searchParams.get("name")?.toString()}

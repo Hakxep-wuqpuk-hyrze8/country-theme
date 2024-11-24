@@ -43,7 +43,7 @@ export default function Selector({
           aria-expanded={open}
           // disabled={isGetCountryLoading}
           className={cn(
-            "w-[240px] p-6 justify-between text-darkText select-none shadow-md rounded-none bg-white dark:bg-darkBlue dark:text-white dark:hover:bg-darkBackground transition-none",
+            "w-[240px] p-6 justify-between text-texts-dark select-none shadow-md rounded-none bg-white dark:bg-blue-900 dark:text-texts-light dark:hover:bg-backgrounds-dark transition-none",
             current === "" ? "font-medium text-muted-foreground dark:text-muted-foreground " : "font-semibold"
           )}
         >

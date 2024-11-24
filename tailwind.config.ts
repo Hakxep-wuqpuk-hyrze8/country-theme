@@ -9,13 +9,26 @@ const config: Config = {
     "./feature/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+		// screens: {
+		// 	'2xl': '1400px',
+		// 	xs: '520px'
+		// },	
   	extend: {
   		colors: {
-				darkText: 'hsl(200, 15%, 8%)',
-				darkGray: 'hsl(0, 0%, 52%)',
-				darkBlue: 'hsl(209, 23%, 22%)',
-				darkBackground: 'hsl(207, 26%, 17%)',
-				lightBackground: 'hsl(0, 0%, 98%)',
+				texts: {
+					light: 'hsl(0, 0%, 100%)',
+					dark: 'hsl(200, 15%, 8%)'
+				},
+				backgrounds: {
+					light: 'hsl(0, 0%, 98%)',
+					dark: 'hsl(207, 26%, 17%)'
+				},
+				grey: {
+					'900': 'hsl(0, 0%, 52%)',
+				},
+				blue: {
+					'900': 'hsl(209, 23%, 22%)'
+				},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

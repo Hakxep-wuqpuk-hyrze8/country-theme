@@ -18,14 +18,14 @@ export default async function DashboardPage({
   const currentName = searchParams?.name ?? "";
 
   return (
-    <main className="min-h-screen bg-lightBackground dark:bg-darkBackground flex flex-col p-7">
-      <div className="flex justify-between mb-7">
+    <main className="min-h-screen bg-backgrounds-light dark:bg-backgrounds-dark flex flex-col p-7">
+      <div className="flex flex-col gap-4 md:flex-row md:gap-0 md:justify-between mb-7">
         <SearchCountryInput />
-        <Suspense fallback={<RegionSelectorSkeleton />}>
+        <Suspense key={currentName + currentPage} fallback={<RegionSelectorSkeleton />}>
           <RegionSelector currentRegion={currentRegion} />
         </Suspense>
       </div>
-      <Suspense fallback={<CardTableSkeleton />} >
+      <Suspense key={currentName + currentPage} fallback={<CardTableSkeleton />} >
         <CountryTable name={currentName} region={currentRegion} page={currentPage} />
       </Suspense>
     </main>
