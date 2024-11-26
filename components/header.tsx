@@ -2,8 +2,13 @@
 
 import Link from "next/link";
 import ToggleModeButton from './toggle-mode-button';
+import React from "react";
 
-export default function Header() {
+interface HeaderProps {
+  children: React.ReactNode
+};
+
+export default function Header({ children }: HeaderProps) {
   return (
     <nav className="bg-white dark:bg-blue-900 w-full flex justify-between items-center p-7 drop-shadow-md">
       <Link href="/">
@@ -11,7 +16,10 @@ export default function Header() {
           Where In The World?
         </h1>
       </Link>
-      <ToggleModeButton />
+      <div className="flex flex-row justify-center items-center gap-2">
+        <ToggleModeButton />
+        {children}
+      </div>
     </nav>
   )
 }

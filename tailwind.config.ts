@@ -9,10 +9,6 @@ const config: Config = {
     "./feature/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-		// screens: {
-		// 	'2xl': '1400px',
-		// 	xs: '520px'
-		// },	
   	extend: {
   		colors: {
 				texts: {

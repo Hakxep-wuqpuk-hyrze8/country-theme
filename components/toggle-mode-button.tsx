@@ -1,8 +1,8 @@
 "use client"
 
 import { LuMoon } from 'react-icons/lu'
-import { Button } from './ui/button'
 import { useEffect } from 'react';
+import GhostButton from './ghost-button';
 
 export default function ToggleModeButton() {
   useEffect(() => {
@@ -23,15 +23,10 @@ export default function ToggleModeButton() {
   }
 
   return (
-    <Button
-      variant="ghost"
-      className="dark:bg-blue-900 dark:hover:bg-backgrounds-dark"
+    <GhostButton
+      text="Dark Mode"
       onClick={toggleTheme}
-    >
-      <div className="flex justify-center items-center gap-x-1.5">
-        <LuMoon className="size-4 text-muted-foreground dark:text-texts-light" />
-        <p className="text-muted-foreground dark:text-texts-light font-semibold text-sm">Dark Mode</p>
-      </div>
-    </Button>
+      Icon={<LuMoon className="size-4 text-muted-foreground dark:text-texts-light" />}
+    />
   )
 }
